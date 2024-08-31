@@ -1,0 +1,32 @@
+name: Build index
+
+on:
+  schedule:
+    - cron: '0 0 * * MON'
+  workflow_dispatch:
+
+jobs:
+  build_and_commit:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Setup Go
+      uses: actions/setup-go@v2
+      with:
+        go-version: '^1.20'
+
+    - name: Checkout repo
+      uses: actions/checkout@v2
+
+    - name: Run main.go
+      working-directory: ./index_builder
+      run: go run main.go
+
+    - name: Commit and push changes
+      working-directory: ./index_builder
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add index.txt
+        git commit -m "Updated index.txt via GitHub Actions"
+        git push
