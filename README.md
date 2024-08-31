@@ -1,4 +1,5 @@
 # README
+# IN-PROGRESS.........................................
 - [https://github.com/nvim-telescope/telescope.nvim/wiki/Extensions](telescope extensions)
 - Example of similar extension for Scale: [https://github.com/softinio/scaladex.nvim?tab=readme-ov-file] 
 
