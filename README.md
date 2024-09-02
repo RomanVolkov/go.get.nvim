@@ -1,26 +1,52 @@
-# README
-# IN-PROGRESS.........................................
-- [https://github.com/nvim-telescope/telescope.nvim/wiki/Extensions](telescope extensions)
-- Example of similar extension for Scale: [https://github.com/softinio/scaladex.nvim?tab=readme-ov-file] 
+# `go get` for NeoVim
 
-Data for Go:
-- https://index.golang.org/index
-    - I need to use `since` param
-- https://github.com/avelino/awesome-go
-- ? Anything else
+An extension for [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim) that allows you to install Golang dependencies without leaving of the editor.
 
-Tasks:
- - [x] How to do development for Neovim
- - [ ] How to add extension into Telescope
- - [x] How to use Telescope to search for custom data
- - [x] How to add custom command on `select` action from the filtered list
- - [ ] How to structure the data for any dependency management: name for command (`go get` vs `pip install`), package name, package description (aka take from readme)
- - [ ] How to collect the index for Go?
+### Warning ⚠️
+Current project is still under development, although you can start using it already.
 
 
+## Requirements
 
-# Goal
+- [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim) 
 
-- Implement extension for Telescope to install dependencies for golang
-- How to build deps index
- 
+
+## Setup
+You can setup the extension by adding the following to your config:
+```lua
+require'telescope'.load_extension('go_get')
+```
+
+Currently plugin integration is tested with only `lazy` plugin manager, others to be done.
+
+### go get
+
+Currently there is only one function for this project - `packages_search`. It will open Telescope with dropdown menu where you can select a Golang dependency. 
+By selecting it (with Enter) you will trigger installation. You can trigger as many installations as you want, they all be installed one-by-one. 
+```lua
+require("telescope").extensions.go_get.packages_search()
+```
+
+
+You can map the action for quicker usage like this
+
+```lua
+vim.keymap.set("n", "<Leader>gog", function()
+  require("telescope").extensions.go_get.packages_search()
+end, { desc = "[Go] [G]et packages" })
+```
+
+
+## Roadmap
+
+There are things I would like to implement (but not limited to this):
+- [ ] Cleanup URL packages: ignore all forks
+- [ ] Validate new and old URL package: do not store URLs that cannot be installed anymore
+- [ ] Integrate package preview (if it's possible)
+- [ ] Test integration with others plugin managers
+
+## Support and Q&A 
+
+If you have any suggestion or improvement - feel free to open an issue or submit a PR.
+If you would like to discuss - I invite you to my [Discord server](https://discord.gg/QeVvfvFfb6)
+

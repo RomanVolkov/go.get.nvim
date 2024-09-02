@@ -49,6 +49,7 @@ Thumbs.db
 *.test
 *.exe
 *.test.exe
+./index_builder/main
 
 # Lua #
 ##########

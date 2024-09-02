@@ -7,6 +7,8 @@ import (
 	"time"
 )
 
+const indexPath = "../lua/go_get/index.txt"
+
 // TODO:
 // 1. validate the URL somehow?: 1) url can be used; 2) discard all forks (gh)
 // 1.5 Publish on github
@@ -15,7 +17,7 @@ import (
 // 4. Maybe copy it inside plugin folder?
 
 func main() {
-	loadedIndex, indexTimestamp, _ := index.LoadIndex("./index.txt")
+	loadedIndex, indexTimestamp, _ := index.LoadIndex(indexPath)
 	count := len(loadedIndex)
 	fmt.Println(fmt.Sprintf("Index size: %v", count))
 	end := time.Now()
@@ -26,5 +28,5 @@ func main() {
 	fmt.Printf("New size: %v ", len(updatedIndex))
 	fmt.Printf("diff: %v\n", len(updatedIndex)-count)
 
-	index.StoreIndex("./index.txt", end, updatedIndex)
+	index.StoreIndex(indexPath, end, updatedIndex)
 }
