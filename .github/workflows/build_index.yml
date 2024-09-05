@@ -27,9 +27,11 @@ jobs:
 
     - name: Commit and push changes
       working-directory: ./index_builder
+      with:
+        ssh-key: ${{secrets.GH_ACTIONS_KEY}}
       run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
+        # git config --local user.email "action@github.com"
+        # git config --local user.name "GitHub Action"
         git add ../lua/go_get/index.txt
         git commit -m "Updated index.txt via GitHub Actions"
         git push
