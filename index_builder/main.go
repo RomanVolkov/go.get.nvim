@@ -16,10 +16,8 @@ func main() {
 	fmt.Println(fmt.Sprintf("Index size: %v", count))
 	end := time.Now()
 
-	end = indexTimestamp.Add(time.Hour * 24 * 7)
-	//
-	// fmt.Println(fmt.Sprintf("start: %v - end: %v", indexTimestamp.Format(time.RFC3339Nano), end.Format(time.RFC3339Nano)))
-	//
+	// end = indexTimestamp.Add(time.Hour * 24 * 7)
+	fmt.Println(fmt.Sprintf("start: %v - end: %v", indexTimestamp.Format(time.RFC3339Nano), end.Format(time.RFC3339Nano)))
 	uniqueURLs := goindexloader.GetUniqueURLs(indexTimestamp, end, time.Hour*2)
 	fmt.Println(fmt.Sprintf("Loaded urls size: %v", count))
 
