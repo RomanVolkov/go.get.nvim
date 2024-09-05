@@ -15,11 +15,12 @@ jobs:
     - name: Setup Go
       uses: actions/setup-go@v2
       with:
-        ssh-key: ${{secrets.GH_ACTIONS_KEY}}
         go-version: '^1.20'
 
     - name: Checkout repo
       uses: actions/checkout@v2
+      with:
+        ssh-key: ${{secrets.GH_ACTIONS_KEY}}
 
     - name: Run main.go
       working-directory: ./index_builder
@@ -27,8 +28,6 @@ jobs:
 
     - name: Commit and push changes
       working-directory: ./index_builder
-      with:
-        ssh-key: ${{secrets.GH_ACTIONS_KEY}}
       run: |
         # git config --local user.email "action@github.com"
         # git config --local user.name "GitHub Action"
