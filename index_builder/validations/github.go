@@ -10,8 +10,6 @@ import (
 	"os"
 	"strings"
 	"sync"
-
-	"github.com/OlyMahmudMugdho/gotenv/gotenv"
 )
 
 const getRepoURL = "https://api.github.com/repos/"
@@ -45,7 +43,6 @@ func GetPackageURL(u string) string {
 // bool - true/false if repo is a fork
 // error - any error
 func isGithubFork(url string) (bool, error) {
-	gotenv.Load()
 	owner, repo := getOwnerAndRepo(url)
 	if len(owner) == 0 {
 		return false, errors.New("failed to get owner and repo name from package")

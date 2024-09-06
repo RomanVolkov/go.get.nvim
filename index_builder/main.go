@@ -5,12 +5,21 @@ import (
 	goindexloader "main/go_index_loader"
 	"main/index"
 	"main/validations"
+	"os"
 	"time"
+
+	"github.com/OlyMahmudMugdho/gotenv/gotenv"
 )
 
 const indexPath = "../lua/go_get/index.txt"
 
 func main() {
+	_, err := os.Stat(".env")
+	if !os.IsNotExist(err) {
+		fmt.Println("loading env...")
+		gotenv.Load()
+	}
+
 	loadedIndex, indexTimestamp, _ := index.LoadIndex(indexPath)
 	count := len(loadedIndex)
 	fmt.Println(fmt.Sprintf("Index size: %v", count))
