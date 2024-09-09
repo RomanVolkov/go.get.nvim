@@ -27,7 +27,7 @@ func generateGUID() string {
 }
 
 func createTempDir() (string, error) {
-	tempPath := os.TempDir() + generateGUID()
+	tempPath := os.TempDir() + "/" + generateGUID()
 
 	err := os.MkdirAll(tempPath, 0755)
 	if err != nil {
