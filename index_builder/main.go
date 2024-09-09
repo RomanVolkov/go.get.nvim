@@ -25,19 +25,24 @@ func main() {
 	fmt.Println(fmt.Sprintf("Index size: %v", count))
 	end := time.Now()
 
-	// end = indexTimestamp.Add(time.Hour * 24 * 7)
+	// end = indexTimestamp.Add(time.Hour * 2 * 1)
+
 	fmt.Println(fmt.Sprintf("start: %v - end: %v", indexTimestamp.Format(time.RFC3339Nano), end.Format(time.RFC3339Nano)))
 	uniqueURLs := goindexloader.GetUniqueURLs(indexTimestamp, end, time.Hour*2)
-	fmt.Println(fmt.Sprintf("Loaded urls size: %v", count))
+	fmt.Println(fmt.Sprintf("Loaded urls size: %v", len(uniqueURLs)))
 
+	fmt.Println("Cleaning forks...")
 	validations.RemoveForks(&uniqueURLs)
-	// TODO: validate diff packages with go get - with index update
-	// TODO: validate whole index? - separate gh action
-	// 1. get url
-	// 2. create a tmp dir for 1 url and init go mod
-	// 3. try to install the package with go get -u
-	// 4. get the output - false if failed to install
-	// 5. remove tmp dir - but are they stored there?? Cleanup local checkouts after each batch somehow?
+
+	fmt.Println("Cleaning incorrect package urls...")
+	countBefore := len(uniqueURLs)
+	validations.CleanupInvalidPackageURLs(&uniqueURLs)
+	fmt.Println("Removed %v incorrect package urls", countBefore-len(uniqueURLs))
+
+	fmt.Println("Cleaning invalid packages...")
+	removedURLs := validations.CleanupInvalidPackages(&uniqueURLs)
+	fmt.Println("Removed %v incorrect packages", len(removedURLs))
+	fmt.Println(removedURLs)
 
 	updatedIndex, diff := index.Merge(loadedIndex, uniqueURLs)
 	fmt.Printf("New size: %v ", len(updatedIndex))
