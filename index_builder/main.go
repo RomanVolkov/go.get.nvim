@@ -37,7 +37,7 @@ func main() {
 	fmt.Println("Cleaning incorrect package urls...")
 	countBefore := len(uniqueURLs)
 	validations.CleanupInvalidPackageURLs(&uniqueURLs)
-	fmt.Println("Removed %v incorrect package urls", countBefore-len(uniqueURLs))
+	fmt.Printf("Removed %v incorrect package urls\n", countBefore-len(uniqueURLs))
 
 	fmt.Println("Cleaning invalid packages...")
 	removedURLs := validations.CleanupInvalidPackages(&uniqueURLs)

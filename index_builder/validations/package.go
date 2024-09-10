@@ -121,6 +121,7 @@ func CleanupInvalidPackages(uniqueURLs *map[string]bool) []string {
 			end = len(uniquePackagesSlice)
 		}
 
+		fmt.Printf("CleanupInvalidPackages: range %v - %v", i, end)
 		validatedPackages := ValidatePackages(uniquePackagesSlice[i:end])
 		for url, isValid := range validatedPackages {
 			if !isValid {
