@@ -41,7 +41,7 @@ end, { desc = "[Go] [G]et packages" })
 
 There are things I would like to implement (but not limited to this):
 - [x] Cleanup URL packages: ignore all forks
-- [ ] Validate new & old URL package: do not store URLs that cannot be installed anymore
+- [x] Validate new & old URL package: do not store URLs that cannot be installed anymore
 - [ ] Integrate package preview (if it's possible)
 - [ ] Test integration with others plugin managers
 

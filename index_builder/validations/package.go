@@ -47,10 +47,9 @@ func createEmptyProject(path string) error {
 	return nil
 }
 
-func cleanupCache(path string) error {
+func cleanupCache() error {
 	fmt.Println("Cleaning...")
-	cmd := exec.Command("go", "clean", "-i")
-	cmd.Dir = path
+	cmd := exec.Command("go", "clean", "-modcache")
 	fmt.Println(cmd)
 	err := cmd.Run()
 	if err != nil {
@@ -74,13 +73,6 @@ func ValidatePackage(url string) (bool, error) {
 	cmd.Dir = tempDir
 	output, err := cmd.CombinedOutput()
 	fmt.Println(string(output))
-	defer func() {
-		err := cleanupCache(tempDir)
-		if err != nil {
-			fmt.Printf("Error cleaning up go cache: %v\n", err)
-		}
-
-	}()
 
 	if err != nil {
 		return false, err
@@ -108,6 +100,10 @@ func ValidatePackages(urls []string) map[string]bool {
 		}(url, i, &res)
 	}
 	wg.Wait()
+
+	if err := cleanupCache(); err != nil {
+		fmt.Printf("Error cleaning go modcache: %v\n", err)
+	}
 
 	return res
 }
