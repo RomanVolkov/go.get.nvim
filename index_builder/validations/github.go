@@ -104,7 +104,7 @@ func RemoveForks(uniqueURLs *map[string]bool) {
 		uniquePackagesSlice = append(uniquePackagesSlice, v)
 	}
 
-	batchSize := 100
+	batchSize := 200
 	for i := 0; i < len(uniquePackagesSlice); i = i + batchSize {
 		end := i + batchSize
 		if end > len(uniquePackagesSlice) {

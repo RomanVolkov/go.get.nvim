@@ -63,7 +63,7 @@ func ValidatePackageURLs(urls []string) map[string]bool {
 }
 
 func CleanupInvalidPackageURLs(uniqueURLs *map[string]bool) {
-	batchSize := 100
+	batchSize := 500
 
 	uniquePackagesSlice := make([]string, 0)
 	for v := range *uniqueURLs {

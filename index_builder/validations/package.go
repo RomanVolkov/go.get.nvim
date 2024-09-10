@@ -50,7 +50,6 @@ func createEmptyProject(path string) error {
 func cleanupCache() error {
 	fmt.Println("Cleaning...")
 	cmd := exec.Command("go", "clean", "-modcache")
-	fmt.Println(cmd)
 	err := cmd.Run()
 	if err != nil {
 		return err
@@ -71,8 +70,7 @@ func ValidatePackage(url string) (bool, error) {
 
 	cmd := exec.Command("go", "get", "-u", url)
 	cmd.Dir = tempDir
-	output, err := cmd.CombinedOutput()
-	fmt.Println(string(output))
+	_, err = cmd.CombinedOutput()
 
 	if err != nil {
 		return false, err
@@ -109,7 +107,7 @@ func ValidatePackages(urls []string) map[string]bool {
 }
 
 func CleanupInvalidPackages(uniqueURLs *map[string]bool) []string {
-	batchSize := 100
+	batchSize := 400
 	removedURLs := make([]string, 0)
 
 	uniquePackagesSlice := make([]string, 0)
