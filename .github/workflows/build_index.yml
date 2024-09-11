@@ -10,32 +10,32 @@ jobs:
     permissions:
       contents: write
     timeout-minutes: 360
-  steps:
-    - name: Maximize build space
-      uses: easimon/maximize-build-space@master
-      with:
-        root-reserve-mb: 512
-        swap-size-mb: 1024
-        remove-dotnet: true
-        remove-codeql: true
-        remove-docker-images: true
-        remove-android: true
-    - name: Setup Go
-      uses: actions/setup-go@v2
-      with:
-        go-version: ^1.23
-    - name: Checkout repo
-      uses: actions/checkout@v2
-      with:
-        ssh-key: "${{secrets.GH_ACTIONS_KEY}}"
-    - name: Run main.go
-      working-directory: ./index_builder
-      run: go run main.go
-    - name: Commit and push changes
-      working-directory: ./index_builder
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add ../lua/go_get/index.txt
-        git commit -m "Updated index.txt via GitHub Actions"
-        git push
+    steps:
+      - name: Maximize build space
+        uses: easimon/maximize-build-space@master
+        with:
+          root-reserve-mb: 512
+          swap-size-mb: 1024
+          remove-dotnet: true
+          remove-codeql: true
+          remove-docker-images: true
+          remove-android: true
+      - name: Setup Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: ^1.23
+      - name: Checkout repo
+        uses: actions/checkout@v2
+        with:
+          ssh-key: "${{secrets.GH_ACTIONS_KEY}}"
+      - name: Run main.go
+        working-directory: ./index_builder
+        run: go run main.go
+      - name: Commit and push changes
+        working-directory: ./index_builder
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add ../lua/go_get/index.txt
+          git commit -m "Updated index.txt via GitHub Actions"
+          git push
