@@ -23,7 +23,7 @@ Currently plugin integration is tested with only `lazy` plugin manager, others t
 
 Example of lazy.nvim integration
 
-```
+```lua
 return {
   "https://github.com/RomanVolkov/go.get.nvim",
   keys = function()
@@ -47,7 +47,6 @@ By selecting it (with Enter) you will trigger installation. You can trigger as m
 ```lua
 require("telescope").extensions.go_get.packages_search()
 ```
-
 
 You can map the action for quicker usage like this
 
