@@ -20,12 +20,12 @@ func main() {
 		gotenv.Load()
 	}
 
-	loadedIndex, indexTimestamp, _ := index.LoadIndex(indexPath)
-	count := len(loadedIndex)
+	indexData, indexTimestamp, _ := index.LoadIndex(indexPath)
+	count := len(indexData)
 	fmt.Println(fmt.Sprintf("Index size: %v", count))
 	end := time.Now()
 
-	// end = indexTimestamp.Add(time.Hour * 24 * 7)
+	end = indexTimestamp.Add(time.Hour * 24 * 31)
 
 	fmt.Println(fmt.Sprintf("start: %v - end: %v", indexTimestamp.Format(time.RFC3339Nano), end.Format(time.RFC3339Nano)))
 	uniqueURLs := goindexloader.GetUniqueURLs(indexTimestamp, end, time.Hour*2)
@@ -44,10 +44,9 @@ func main() {
 	// fmt.Println("Removed %v incorrect packages", len(removedURLs))
 	// fmt.Println(removedURLs)
 
-	updatedIndex, diff := index.Merge(loadedIndex, uniqueURLs)
-	fmt.Printf("New size: %v ", len(updatedIndex))
-	fmt.Printf("diff: %v\n", len(updatedIndex)-count)
-	fmt.Println(diff)
+	index.UpdateIndex(&indexData, uniqueURLs)
 
-	index.StoreIndex(indexPath, end, updatedIndex)
+	fmt.Printf("New index size: %v; diff: %v\n", len(indexData), len(indexData)-count)
+
+	index.StoreIndex(indexPath, end, indexData)
 }
