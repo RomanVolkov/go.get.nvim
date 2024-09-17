@@ -81,11 +81,20 @@ M.packages_search = function(opts)
 			finder = finders.new_table({
 				results = loadIndex(),
 				entry_maker = function(entry)
+					local url = entry[1]
+					local license = entry[3]
+					if license == nil then
+						license = ""
+					end
+					local description = entry[3]
+					if description == nil then
+						description = ""
+					end
 					return {
 						value = entry,
 						display = entry[1], -- value to display
 						-- I don't think that I need a license as search part
-						ordinal = entry[1] .. entry[3] .. " " .. entry[4], -- value for search
+						ordinal = entry[1] .. license .. " " .. description, -- value for search
 					}
 				end,
 			}),
@@ -113,21 +122,25 @@ M.packages_search = function(opts)
 					local selectionValue = selection["value"]
 					-- local url_value = selection["value"][1]
 					local bufnr = status.preview_bufnr
+					local url = selectionValue[1]
+					local license = selectionValue[2]
+					local homepage = selectionValue[3]
+					local description = selectionValue[4]
 					local previewMessage = {
 						"Package URL:",
-						selectionValue[1],
+						url,
 					}
-					if string.len(selectionValue[2]) > 0 then
+					if string.len(license) > 0 then
 						table.insert(previewMessage, "License:")
-						table.insert(previewMessage, selectionValue[2])
+						table.insert(previewMessage, license)
 					end
-					if string.len(selectionValue[3]) > 0 then
+					if string.len(homepage) > 0 then
 						table.insert(previewMessage, "Homepage")
-						table.insert(previewMessage, selectionValue[3])
+						table.insert(previewMessage, homepage)
 					end
-					if string.len(selectionValue[4]) > 0 then
+					if string.len(description) > 0 then
 						table.insert(previewMessage, "Description")
-						table.insert(previewMessage, selectionValue[4])
+						table.insert(previewMessage, description)
 					end
 					vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, previewMessage)
 				end,
