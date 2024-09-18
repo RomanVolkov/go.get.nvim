@@ -4,6 +4,8 @@ An extension for [telescope.nvim](https://github.com/nvim-telescope/telescope.nv
 
 ### Demo
 
+https://github.com/user-attachments/assets/b0c1ed68-ea01-4455-bdfb-643a22f66a79
+
 
 ### Warning ⚠️
 Current project is still under development, although you can start using it already.
