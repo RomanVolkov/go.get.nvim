@@ -1,6 +1,9 @@
-# `go get` for NeoVim
+# `go get` plugin for NeoVim
 
 An extension for [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim) that allows you to install Golang dependencies without leaving of the editor.
+
+### Demo
+
 
 ### Warning ⚠️
 Current project is still under development, although you can start using it already.
@@ -60,7 +63,7 @@ end, { desc = "[Go] [G]et packages" })
 There are things I would like to implement (but not limited to this):
 - [x] Cleanup URL packages: ignore all forks
 - [x] Validate new & old URL package: do not store URLs that cannot be installed anymore
-- [ ] Integrate package preview (in progress)
+- [x] Integrate package preview (in progress)
 - [ ] Test integration with others plugin managers
 
 
