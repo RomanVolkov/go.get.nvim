@@ -7,9 +7,6 @@ An extension for [telescope.nvim](https://github.com/nvim-telescope/telescope.nv
 https://github.com/user-attachments/assets/b0c1ed68-ea01-4455-bdfb-643a22f66a79
 
 
-### Warning ⚠️
-Current project is still under development, although you can start using it already.
-
 
 ## Requirements
 
@@ -43,7 +40,7 @@ return {
 }
 ```
 
-### go get
+### Capabilities
 
 Currently there is only one function for this project - `packages_search`. It will open Telescope with dropdown menu where you can select a Golang dependency. 
 By selecting it (with Enter) you will trigger installation. You can trigger as many installations as you want, they all be installed one-by-one. 
