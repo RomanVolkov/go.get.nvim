@@ -74,7 +74,6 @@ process_queue = function()
 end
 
 M.packages_search = function(opts)
-	opts = opts or require("telescope.themes").get_dropdown({})
 	pickers
 		.new(opts, {
 			prompt_title = "go get",
