@@ -26,6 +26,9 @@ Example of lazy.nvim integration
 ```lua
 return {
   "https://github.com/RomanVolkov/go.get.nvim",
+  dependencies = {
+    "nvim-telescope/telescope.nvim",
+  },
   keys = function()
     return {
       {
